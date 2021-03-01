@@ -18,7 +18,7 @@ export default class Signup extends Component {
         ...prevState.errors,
         {
           elm,
-          msg,
+          msg
         },
       ],
     }));
@@ -50,10 +50,13 @@ export default class Signup extends Component {
     this.setState({ password: e.target.value });
     this.clearValidationErr("password");
 
-    this.setState({ pwdState: "weak" });
-    if (e.target.value.length > 8) {
+    if (e.target.value.length < 4) {
+      this.setState({ pwdState: "weak" });
+    }  
+    if (e.target.value.length > 4) {
       this.setState({ pwdState: "medium" });
-    } else if (e.target.value.length > 12) {
+    } 
+    if (e.target.value.length > 6) {
       this.setState({ pwdState: "strong" });
     }
   }
@@ -71,7 +74,7 @@ export default class Signup extends Component {
     if (this.state.email === "") {
       this.showValidationErr("email", "Email Cannot be empty!");
     }
-    if (this.state.password == "") {
+    if (this.state.password === "") {
       this.showValidationErr("password", "Password Cannot be empty!");
     }
   }

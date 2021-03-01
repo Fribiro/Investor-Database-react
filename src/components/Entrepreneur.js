@@ -1,10 +1,17 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Header from "./Header";
+import Footer from "./Footer";;
 
 export default class Entrepreneur extends Component {
+  state = {
+    visible: true,
+  };
+        
     render() {
         return (
           <div>
+            {this.state.visible ? <Header /> : null}
             <header className="intro">
               <div className="investor-header nav-anime">
                 <img src="/img/workdream.jpg" alt="" />
@@ -131,6 +138,7 @@ export default class Entrepreneur extends Component {
                 </div>
               </div>
             </div>
+            {this.state.visible ? <Footer /> : null}
           </div>
         );
     }

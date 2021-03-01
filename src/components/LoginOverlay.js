@@ -2,10 +2,16 @@ import React, { Component } from 'react'
 import TransitionGroup from "react-transition-group";
 
 import FadeTransition from "./transitions/fadeTransition";
+import Header from "./Header";
+import Footer from "./Footer";
 
 import Login from './Login'
 import Signup from './Signup'
 export default class LoginOverlay extends Component {
+  state = {
+    visible: true,
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -25,6 +31,7 @@ export default class LoginOverlay extends Component {
   render() {
     return (
       <div className="root-container">
+        {this.state.visible ? <Header /> : null}
         <div className="box-controller">
           <div
             className={
@@ -56,6 +63,7 @@ export default class LoginOverlay extends Component {
             <Signup />
           </div>
         </FadeTransition>
+        {this.state.visible ? <Footer /> : null}
       </div>
     );
   }

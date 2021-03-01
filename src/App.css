@@ -64,6 +64,7 @@ h2 {
 }
 .navbar {
   background-color: #333;
+  height: 60px;
 }
 .navbar-nav a {
   font-family: poppins;
@@ -533,27 +534,28 @@ input[type=submit]:hover {
 .userProfile {
   display: grid;
   grid-template-columns: 20% 80%;
-  margin: 0px 0 0 40px;
+  margin: 60px 0 0 40px;
 }
 
 .profileNav {
   grid-column: 1;
   grid-row: 1;
-  margin-right: 10px;
   height: 400px;
-  position: relative;
   background-color: #efefef;
   box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.2);
+  width: 240px;
 }
-
+.profileNavClickable {
+  cursor: pointer;
+}
 .userHeader {
   border-radius: 50%;
   border: 1px solid #000;
   height: 150px;
   width: 150px;
   align-self: center;
-  margin: 20px 0 0 43px;
-  position: absolute;
+  margin: 20px 0 0 45px;
+  padding: 0;
 }
 
 .userHeader img {
@@ -564,26 +566,73 @@ input[type=submit]:hover {
 }
 
 .userNav {
-  margin: 200px 0 0 0;
-  padding: 0 0 0 0;
+  padding: 0;
 }
 
 .usernav, ul {
   list-style: none;
+  padding-left: 60px;
 }
 
 .usernav,ul li {
   padding: 5px 0;
-  font-family: 'Bebas Neue',
-    cursive;
 }
-
+.sideheaders {
+  font-family: 'Abril Fatface',cursive;
+}
 .profileDetails {
   grid-column: 2;
   grid-row: 1;
   margin-left: 10px;
-  height: 100vh;
   background-color: #efefef;
+  padding: 30px 0px 0 60px;
+}
+
+.profile-head h5 {
+  color: #333;
+}
+
+.profile-head h6 {
+  color: #3DB2C7;
+}
+
+.profile-edit-btn {
+  border: none;
+  border-radius: 1.5rem;
+  width: 30%;
+  padding: 2%;
+  background-color: #56b2dd;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  margin-left: 260px;
+}
+.profile-sub-headers {
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+.profile-head .nav-tabs {
+  margin-bottom: 5%;
+}
+
+.profile-head .nav-tabs .nav-link {
+  font-weight: 600;
+  border: none;
+}
+
+.profile-head .nav-tabs .nav-link.active {
+  border: none;
+  border-bottom: 2px solid #3DB2C7;
+}
+
+.profile-tab label {
+  font-weight: 600;
+}
+
+.profile-tab p {
+  font-weight: 600;
+  color: #3DB2C7;
 }
 @media only screen and (max-width: 767px) {
   .navbar-nav.ml-auto {
@@ -1088,11 +1137,11 @@ i.fa.fa-quote-left {
 }
 
 .pwd-medium {
-  background-color: #3498db;
+  background-color: #dbd834;
 }
 
 .pwd-strong {
-  background-color: #2ecc71;
+  background-color: #27ac5e;
 }
 
 .show {
