@@ -12,7 +12,7 @@ export default class Profile extends Component {
   render() {
     return (
       <div>
-        {this.state.visible ? <Header /> : null}
+        <Header/>
         <div className="userProfile">
           <div className="profileNav row">
             <div className="userHeader">
@@ -45,10 +45,10 @@ export default class Profile extends Component {
 
           <div className="profileDetails">
             {this.state.visible ? <PersonalDetails /> : null}
-            {this.state.visible ? <BusinessDetails /> : <BusinessDetails />}
+            {!this.state.visible ? <BusinessDetails /> : null}
           </div>
         </div>
-        {this.state.visible ? <Footer /> : null}
+        <Footer /> 
       </div>
     );
   }

@@ -16,13 +16,14 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/entrepreneur" component={Entrepreneur}/>
-              <Route exact path="/investor" component={Investor} />
-              <Route exact path="/about" component={About} />
-              <Route exact path="/contact" component={Contact} />
-              <Route exact path="/profile" component={Profile} />
-              <Route exact path="/login" component={LoginOverlay} />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/entrepreneur" component={Entrepreneur} />
+          <Route exact path="/investor" component={Investor} />
+          <Route exact path="/about" component={About} />
+          <Route exact path="/contact" component={Contact} />
+          <Route exact path="/profile" component={Profile} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={LoginOverlay} />
         </Switch>
       </Router>
     </div>

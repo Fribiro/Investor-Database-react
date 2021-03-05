@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
-import TransitionGroup from "react-transition-group";
 
-import FadeTransition from "./transitions/fadeTransition";
 import Header from "./Header";
 import Footer from "./Footer";
 
-import Login from './Login'
-import Signup from './Signup'
+import InvestorSignup from './InvestorSignup'
+import EntrepreneurSignup from './EntrepreneurSignup';
 export default class LoginOverlay extends Component {
   state = {
     visible: true,
@@ -40,7 +38,7 @@ export default class LoginOverlay extends Component {
             }
             onClick={this.showLogin.bind(this)}
           >
-            Login
+            Entrepreneur
           </div>
           <div
             className={
@@ -49,20 +47,14 @@ export default class LoginOverlay extends Component {
             }
             onClick={this.showSignup.bind(this)}
           >
-            Register
+            Investor
           </div>
         </div>
 
-        <FadeTransition isOpen={this.state.isLoginOpen} duration={500}>
-          <div className="box-container">
-            <Login />
-          </div>
-        </FadeTransition>
-        <FadeTransition isOpen={this.state.isRegisterOpen} duration={500}>
-          <div className="box-container">
-            <Signup />
-          </div>
-        </FadeTransition>
+        <div className="box-container">
+          {this.state.isLoginOpen && <EntrepreneurSignup/>}
+          {this.state.isRegisterOpen && <InvestorSignup/>}
+        </div>
         {this.state.visible ? <Footer /> : null}
       </div>
     );

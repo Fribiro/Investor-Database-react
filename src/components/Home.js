@@ -29,16 +29,10 @@ export default class Home extends Component {
                     alt="..."
                   />
                   <div className="carousel-caption d-none d-md-block">
-                    <h5
-                      className="animate__animated animate__fadeInLeft"
-                      style={{ animationDelay: "1s" }}
-                    >
+                    <h5>
                       Reliable
                     </h5>
-                    <p
-                      className="animate__animated animate__fadeInRight"
-                      style={{ animationDelay: "2s" }}
-                    >
+                    <p>
                       Our team of highly skilled developers and technicians work
                       around the clock to ensure zero to no failure or downtime.
                     </p>
@@ -47,16 +41,10 @@ export default class Home extends Component {
                 <div className="carousel-item">
                   <img src="/img/dev.jpg" className="d-block w-100" alt="..." />
                   <div className="carousel-caption d-none d-md-block">
-                    <h5
-                      className="animate__animated animate__fadeInLeft"
-                      style={{ animationDelay: "1s" }}
-                    >
+                    <h5>
                       Secure
                     </h5>
-                    <p
-                      className="animate__animated animate__fadeInRight"
-                      style={{ animationDelay: "2s" }}
-                    >
+                    <p>
                       Stringent policies and measures have been put in place to
                       ensure atmost security of your data and transactions
                       carried out on our platform.
@@ -70,16 +58,10 @@ export default class Home extends Component {
                     alt="..."
                   />
                   <div className="carousel-caption d-none d-md-block">
-                    <h5
-                      className="animate__animated animate__fadeInLeft"
-                      style={{ animationDelay: "1s" }}
-                    >
+                    <h5>
                       Transparent
                     </h5>
-                    <p
-                      className="animate__animated animate__fadeInRight"
-                      style={{ animationDelay: "2s" }}
-                    >
+                    <p>
                       Structures are in place to facilitate openness in the way
                       business is carried out.
                     </p>
@@ -116,7 +98,7 @@ export default class Home extends Component {
               <h2>Core Values</h2>
               {/* <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p> */}
               <div className="columns">
-                <div className="col fade-in">
+                <div className="col">
                   <h3>Integrity</h3>
                   <p>
                     At EkezaKenya we offer you consistent and uncompromising
@@ -124,7 +106,7 @@ export default class Home extends Component {
                     from the onset.
                   </p>
                 </div>
-                <div className="col fade-in">
+                <div className="col ">
                   <h3>Transparency</h3>
                   <p>
                     Have any worries? Fear not, for we operate in a way that
@@ -132,7 +114,7 @@ export default class Home extends Component {
                     the Entrepreneur.
                   </p>
                 </div>
-                <div className="col fade-in">
+                <div className="col">
                   <h3>Security</h3>
                   <p>
                     EkezaKenya has stringent top notch policies and measures put
@@ -144,10 +126,10 @@ export default class Home extends Component {
             </div>
             <div className="home-content">
               <div className="section-one">
-                <div className="section-one-img slide-in from-left">
-                  <img data-src="/img/businessman.jpg" alt="" />
+                <div className="section-one-img ">
+                  <img src="/img/businessman.jpg" alt="" />
                 </div>
-                <div className="section-one-text slide-in from-right">
+                <div className="section-one-text ">
                   <h2>INVEST WITH US</h2>
                   <p>
                     Ready to invest and earn from the comfort of your seat? Look
@@ -165,7 +147,7 @@ export default class Home extends Component {
               </div>
               <main></main>
               <div className="section-two">
-                <div className="section-two-text slide-in from-left">
+                <div className="section-two-text ">
                   <h2>GROW WITH US</h2>
                   <p>
                     Have you been in constant thought? Do you seek to grow your
@@ -181,16 +163,13 @@ export default class Home extends Component {
                     </button>
                   </div>
                 </div>
-                <div className="section-two-img slide-in from-right">
-                  <img data-src="/img/board.jpg" alt="" />
+                <div className="section-two-img ">
+                  <img src="/img/board.jpg" alt="" />
                 </div>
               </div>
             </div>
             <div className="section-three">
-              <h2
-                className="animate__animated animate__fadeInDown"
-                style={{ animationDelay: "1s" }}
-              >
+              <h2>
                 <span>JOIN OUR EVER GROWING COMMUNITY OF BUSINESS GURUS.</span>
                 <br />
                 "In investing, what is comfortable is rarely profitable." -
@@ -204,10 +183,7 @@ export default class Home extends Component {
                 self-analysis. The best investment strategy can turn into the
                 worst if you don't have the stomach to see it through.
               </h2>
-              <p
-                className="animate__animated animate__fadeInUp"
-                style={{ animationDelay: "2s" }}
-              ></p>
+              <p></p>
               <div className="section-three-video-container">
                 <div className="section-three-color-overlay"></div>
                 <video

@@ -1030,7 +1030,9 @@ i.fa.fa-quote-left {
 .inner-container.show {
   visibility: visible;
 }
-
+.login {
+  margin-top: 120px;
+}
 /* Header */
 .header {
   text-align: center;
@@ -1063,9 +1065,12 @@ i.fa.fa-quote-left {
   font-weight: 600;
   padding-left: 5px;
 }
+.input-group label {
+  width: 100%;
+}
 
 /* Input */
-.login-input {
+.input-group input {
   height: 2.1em;
   border-radius: 3px;
   border: 1px solid #06B6D5;
@@ -1075,15 +1080,37 @@ i.fa.fa-quote-left {
   font-size: 19px;
   color: #3e3e42;
   background: rgba(15, 15, 15, 0.01);
+  width: 100%;
+}
+.input-group input.error {
+  border: 1px solid red;
 }
 
-.login-input:hover {
+.input-group input:hover {
   border: 2px solid #06B6D5;
 }
 
-.login-input:focus {
-  border: 2px solid #6565e7;
-  box-shadow: 0px 0px 20px rgba(15, 15, 15, 0.2);
+.input-group input:focus {
+  border: 2px solid #06B6D5;
+  box-shadow: 0px 0px 20px hsla(0, 0%, 6%, 0.2);
+}
+.name-control {
+  display: grid;
+  grid-template-columns: 48% 48%;
+  grid-column-gap: 13px;
+  width: 100%;
+  max-width: 24em;
+  min-width: 21em;
+}
+
+.firstName {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.lastName {
+  grid-column: 2;
+  grid-row: 1;
 }
 
 /* Input Placeholder */
@@ -1096,24 +1123,25 @@ i.fa.fa-quote-left {
 
 .login-btn {
   padding: 2px 30px;
-  /* background-color: #417cef; */
-  border: 0;
-  font-size: 18px;
+  background: #3DB2C7;
+  border: 2px solid #3DB2C7;
+  font-size: 16px;
+  color: #fff;
   border-radius: 3px;
-  font-family: Oxygen, sans-serif;
-  background-color: rgba(15, 15, 15, 0.03);
   margin-top: 20px;
-  border: 2px solid #417cef;
-  transition: background-color 0.3s ease-out;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
   cursor: pointer;
 }
 
 .login-btn:hover,
 .login-btn:focus {
-  background-color: #417cef;
-  color: white;
+  opacity: .8;
 }
-
+.login-btn:active {
+  transform: scale(0.95);
+}
 .danger-error {
   color: #e74c3c;
   font-size: 16px;
