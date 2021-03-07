@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Axios from "axios";
 import { Redirect } from "react-router-dom";
 
 const emailRegex = RegExp(
@@ -28,6 +29,7 @@ export default class Login extends Component {
         email: "",
         password: "",
       },
+      message: "",
     };
   }
   handleSubmit = (e) => {
@@ -55,7 +57,29 @@ export default class Login extends Component {
     this.setState({ formErrors, [name]: value });
   };
 
-  submitLogin(e) {}
+  submitLogin = (e) => {
+    let formData = { ...this.state };
+    Axios.post("http://localhost:5500/auth/login", {
+      email: formData.email,
+      password: formData.password,
+    }).then((res) => {
+      console.log(res);
+      if (res.status === 200) {
+        this.setState({
+          redirect: "/profile",
+        });
+        console.log("Logged in");
+      } else if (res.status === 400) {
+        this.setState({
+          message: res.data.message,
+        });
+      } else if (res.status === 401) {
+        this.setState({
+          message: res.data.message,
+        });
+      }
+    });
+  };
 
   render() {
     const { formErrors } = this.state;
@@ -78,9 +102,7 @@ export default class Login extends Component {
                   onChange={this.handleChange}
                 />
                 {formErrors.email.length > 0 && (
-                  <small className="danger-error">
-                    {formErrors.email}
-                  </small>
+                  <small className="danger-error">{formErrors.email}</small>
                 )}
               </div>
               <div className="input-group">
@@ -94,6 +116,9 @@ export default class Login extends Component {
                 />
                 {formErrors.password.length > 0 && (
                   <small className="danger-error">{formErrors.password}</small>
+                )}
+                {this.state.message && (
+                  <small className="danger-error">{this.state.message}</small>
                 )}
               </div>
 

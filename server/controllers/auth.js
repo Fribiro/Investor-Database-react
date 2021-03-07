@@ -23,7 +23,7 @@ exports.login = async (req, res) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
-      return res.status(400).render("login", {
+        res.status(400).json({
         message: "Please provide an email and password",
       });
     }
@@ -32,12 +32,12 @@ exports.login = async (req, res) => {
       [email],
       async (error, results) => {
         //bcryptcompare compares the password being typed with the one in the db
-        console.log(results);
+        //console.log(results);
         if (
           !results ||
           !(await bcrypt.compare(password, results[0].password))
         ) {
-          return res.status(401).render("login", {
+          res.status(401).json({
             message: "Email or Password is incorrect",
           });
         } else {
@@ -50,7 +50,7 @@ exports.login = async (req, res) => {
           // sendRefreshToken(res, refreshtoken);
           // sendAccessToken(res, req, accesstoken);
         }
-        res.status(200).redirect("/profile");
+        res.status(200).json({ message: "Welcome Back" });
       }
     );
   } catch (error) {
@@ -60,7 +60,7 @@ exports.login = async (req, res) => {
 };
 
 //signup function for investors
-exports.signup = (req, res) => {
+exports.investorsignup = (req, res) => {
   console.log(req.body); 
 
   const {
@@ -79,14 +79,14 @@ exports.signup = (req, res) => {
     if (results.length > 0) {
       //prevent use of an email already in the db
       res.json({
-        message: "Email Exists",
+        message: "Email exists",
       });
       return;
-    } //else if (ipassword !== iconfirmPassword) {
-      //return res.render('signup', {
-        //message: 'Passwords do not match'
-      //});
-    //}
+    } else if (ipassword !== iconfirmPassword) {
+      res.json({
+        message: 'Passwords do not match',
+      });
+    }
     //do 8 runds of hashing
     let hashedPassword = await bcrypt.hash(ipassword, 8);
     console.log(hashedPassword);
@@ -112,7 +112,7 @@ exports.signup = (req, res) => {
 }
 
 //signup function for entrepreneurs
-exports.signup = (req, res) => {
+exports.entrepreneursignup = (req, res) => {
   console.log(req.body); //grabs data we sent from the Form
 
   const {
@@ -134,14 +134,14 @@ exports.signup = (req, res) => {
       if (results.length > 0) {
         //prevent use of an email already in the db
          res.json({
-          message:"Email Exists",
+          message:"email exists",
         });
         return;
-      } //else if (epassword !== econfirmPassword) {
-        //return res.json({
-          //message: "Passwords do not match",
-        //});
-      
+      } else if (epassword !== econfirmPassword) {
+        res.json({
+        message: 'Passwords do not match',
+      });
+    }
       //do 8 runds of hashing
       let hashedPassword = await bcrypt.hash(epassword, 8);
       console.log(hashedPassword);
@@ -164,7 +164,6 @@ exports.signup = (req, res) => {
             res.status(201).json({
               results
             })
-            // return res.render("/profile");
           }
         }
       );

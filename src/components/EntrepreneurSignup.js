@@ -71,40 +71,45 @@ export default class EntrepreneurSignup extends Component {
         formErrors.epassword =
           value.length < 6 ? "minimum 6 characaters required" : "";
         break;
+      case "econfirmPassword":
+        formErrors.econfirmPassword =
+          value.length < 6 ? "minimum 6 characaters required" : "";
+        break;
       default:
         break;
     }
 
-    this.setState({ formErrors, [name]: value }, () => console.log(this.state));
+    this.setState({ formErrors, [name]: value });
   };
 
   addInvestor = (e) => {
     let formData = { ...this.state };
     console.log(formData.efirstName);
-    Axios.post("http://localhost:5500/auth/signup", {
+    Axios.post("http://localhost:5500/auth/entrepreneursignup", {
       efirstName: formData.efirstName,
       elastName: formData.elastName,
       eemail: formData.eemail,
       epassword: formData.epassword,
+      econfirmPassword: formData.econfirmPassword,
     }).then((res) => {
-      console.log(res)
-      if(res.status=== 201){
-        console.log(res)
+      console.log(res);
+      if (res.status === 201) {
+        console.log(res);
         this.setState({
-          redirect:"/login"
-        })
-      console.log("Success");
-      }else{
-this.setState({
-  message: res.data.message
-})
+          redirect: "/login",
+        });
+        console.log("Success");
+      } else {
+        this.setState({
+          message: res.data.message,
+        });
       }
     });
   }
 
   showEntrepreneurs = (e) => {
     Axios.get("http://localhost:5500/admin").then((results) => {
-      console.log("results");
+
     })
   }
 
@@ -125,9 +130,9 @@ this.setState({
       pwdMedium = true;
       pwdStrong = true;
     }
-if(this.state.redirect){
-return <Redirect to={this.state.redirect}/>
-}
+    if(this.state.redirect){
+    return <Redirect to={this.state.redirect}/>
+    }
     return (
       <div className="inner-container">
         <div className="header">Register</div>
@@ -171,6 +176,10 @@ return <Redirect to={this.state.redirect}/>
             {formErrors.eemail.length > 0 && (
               <small className="danger-error">{formErrors.eemail}</small>
             )}
+
+            {this.state.message && (
+              <small className="danger-error">{this.state.message}</small>
+            )}
           </div>
           <div className="input-group">
             <label htmlFor="epassword">Password</label>
@@ -199,14 +208,24 @@ return <Redirect to={this.state.redirect}/>
             )}
           </div>
           <div className="input-group">
-            <label htmlFor="econfirmpassword">Confirm Password</label>
+            <label htmlFor="econfirmPassword">Confirm Password</label>
             <input
               type="password"
               name="econfirmPassword"
-              className={formErrors.epassword.length > 0 ? "error" : null}
+              className={
+                formErrors.econfirmPassword.length > 0 ? "error" : null
+              }
               placeholder="Password"
               onChange={this.handleChange}
             />
+            {formErrors.econfirmPassword.length > 0 && (
+              <small className="danger-error">
+                {formErrors.econfirmPassword}
+              </small>
+            )}
+            {this.state.message && (
+              <small className="danger-error">{this.state.message}</small>
+            )}
           </div>
           <button
             type="button"
@@ -215,7 +234,6 @@ return <Redirect to={this.state.redirect}/>
           >
             Register
           </button>
-          {this.state.message && <small>{this.state.message}</small>}
         </div>
       </div>
     );

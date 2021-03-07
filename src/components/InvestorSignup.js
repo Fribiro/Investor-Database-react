@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Axios from "axios";
+import { Redirect } from "react-router-dom";
 
 const emailRegex = RegExp(
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
@@ -25,35 +26,26 @@ export default class InvestorSignup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      efirstName: "",
-      elastName: null,
-      eemail: null,
-      epassword: null,
-      econfirmpassword: null,
+      ifirstName: "",
+      ilastName: null,
+      iemail: null,
+      ipassword: null,
+      iconfirmPassword: null,
       formErrors: {
-        efirstName: "",
-        elastName: "",
-        eemail: "",
-        epassword: "",
+        ifirstName: "",
+        ilastName: "",
+        iemail: "",
+        ipassword: "",
+        iconfirmPassword: "",
       },
       pwdState: null,
+      message: "",
+      redirect: null,
     };
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
-
-    if (formValid(this.state)) {
-      console.log(`
-        --SUBMITTING--
-        User Name: ${this.state.efirstName}
-        Last Name: ${this.state.elastName}
-        Email: ${this.state.eemail}
-        Password: ${this.state.epassword}
-      `);
-    } else {
-      console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
-    }
   };
 
   handleChange = (e) => {
@@ -62,46 +54,62 @@ export default class InvestorSignup extends Component {
     let formErrors = { ...this.state.formErrors };
 
     switch (name) {
-      case "efirstName":
-        formErrors.efirstName =
+      case "ifirstName":
+        formErrors.ifirstName =
           value.length < 3 ? "minimum 3 characaters required" : "";
         break;
-      case "elastName":
-        formErrors.elastName =
+      case "ilastName":
+        formErrors.ilastName =
           value.length < 3 ? "minimum 3 characaters required" : "";
         break;
       case "eemail":
-        formErrors.eemail = emailRegex.test(value)
+        formErrors.iemail = emailRegex.test(value)
           ? ""
           : "invalid email address";
         break;
-      case "epassword":
-        formErrors.epassword =
+      case "ipassword":
+        formErrors.ipassword =
+          value.length < 6 ? "minimum 6 characaters required" : "";
+        break;
+      case "iconfirmPassword":
+        formErrors.iconfirmPassword =
           value.length < 6 ? "minimum 6 characaters required" : "";
         break;
       default:
         break;
     }
 
-    this.setState({ formErrors, [name]: value }, () => console.log(this.state));
+    this.setState({ formErrors, [name]: value });
   };
 
   addInvestor = (e) => {
     let formData = { ...this.state };
-    console.log(formData.efirstName);
-    Axios.post("http://localhost:5500/auth/signup", {
-      efirstName: formData.efirstName,
-      elastName: formData.elastName,
-      eemail: formData.eemail,
-      epassword: formData.epassword,
-    }).then(() => {
-      console.log("Success");
+    console.log(formData.ifirstName);
+    Axios.post("http://localhost:5500/auth/investorsignup", {
+      ifirstName: formData.ifirstName,
+      ilastName: formData.ilastName,
+      iemail: formData.iemail,
+      ipassword: formData.ipassword,
+      iconfirmPassword: formData.iconfirmPassword,
+    }).then((res) => {
+      console.log(res);
+      if (res.status === 201) {
+        console.log(res);
+        this.setState({
+          redirect: "/login",
+        });
+        console.log("Success");
+      } else {
+        this.setState({
+          message: res.data.message,
+        });
+      }
     });
   };
 
   showEntrepreneurs = (e) => {
     Axios.get("http://localhost:5500/admin").then((results) => {
-      console.log("results");
+      
     });
   };
 
@@ -122,62 +130,64 @@ export default class InvestorSignup extends Component {
       pwdMedium = true;
       pwdStrong = true;
     }
-
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />;
+    }
     return (
       <div className="inner-container">
         <div className="header">Register</div>
         <div className="box">
           <div className="input-group ">
-            <label htmlFor="efirstName">First name</label>
+            <label htmlFor="ifirstName">First name</label>
             <input
               type="text"
-              name="efirstName"
-              className={formErrors.efirstName.length > 0 ? "error" : null}
+              name="ifirstName"
+              className={formErrors.ifirstName.length > 0 ? "error" : null}
               placeholder="First Name"
               onChange={this.handleChange}
             />
-            {formErrors.efirstName.length > 0 && (
-              <small className="danger-error">{formErrors.efirstName}</small>
+            {formErrors.ifirstName.length > 0 && (
+              <small className="danger-error">{formErrors.ifirstName}</small>
             )}
           </div>
           <div className="input-group lastName">
-            <label htmlFor="elastName">Last Name</label>
+            <label htmlFor="ilastName">Last Name</label>
             <input
               type="text"
-              name="elastName"
-              className={formErrors.elastName.length > 0 ? "error" : null}
+              name="ilastName"
+              className={formErrors.ilastName.length > 0 ? "error" : null}
               placeholder="Last Name"
               onChange={this.handleChange}
             />
-            {formErrors.elastName.length > 0 && (
-              <small className="danger-error">{formErrors.elastName}</small>
+            {formErrors.ilastName.length > 0 && (
+              <small className="danger-error">{formErrors.ilastName}</small>
             )}
           </div>
 
           <div className="input-group">
-            <label htmlFor="eemail">Email</label>
+            <label htmlFor="iemail">Email</label>
             <input
               type="text"
-              name="eemail"
-              className={formErrors.eemail.length > 0 ? "error" : null}
+              name="iemail"
+              className={formErrors.iemail.length > 0 ? "error" : null}
               placeholder="Email"
               onChange={this.handleChange}
             />
-            {formErrors.eemail.length > 0 && (
-              <small className="danger-error">{formErrors.eemail}</small>
+            {formErrors.iemail.length > 0 && (
+              <small className="danger-error">{formErrors.iemail}</small>
             )}
           </div>
           <div className="input-group">
-            <label htmlFor="epassword">Password</label>
+            <label htmlFor="ipassword">Password</label>
             <input
               type="password"
-              name="epassword"
-              className={formErrors.epassword.length > 0 ? "error" : null}
+              name="ipassword"
+              className={formErrors.ipassword.length > 0 ? "error" : null}
               placeholder="Password"
               onChange={this.handleChange}
             />
-            {formErrors.epassword.length > 0 && (
-              <small className="danger-error">{formErrors.epassword}</small>
+            {formErrors.ipassword.length > 0 && (
+              <small className="danger-error">{formErrors.ipassword}</small>
             )}
             {this.state.password && (
               <div className="password-state">
@@ -194,14 +204,21 @@ export default class InvestorSignup extends Component {
             )}
           </div>
           <div className="input-group">
-            <label htmlFor="econfirmpassword">Confirm Password</label>
+            <label htmlFor="iconfirmPassword">Confirm Password</label>
             <input
               type="password"
-              name="econfirmpassword"
-              className={formErrors.epassword.length > 0 ? "error" : null}
+              name="iconfirmPassword"
+              className={
+                formErrors.iconfirmPassword.length > 0 ? "error" : null
+              }
               placeholder="Password"
               onChange={this.handleChange}
             />
+            {formErrors.iconfirmPassword.length > 0 && (
+              <small className="danger-error">
+                {formErrors.iconfirmPassword}
+              </small>
+            )}
           </div>
           <button
             type="button"
@@ -210,7 +227,6 @@ export default class InvestorSignup extends Component {
           >
             Register
           </button>
-          
         </div>
       </div>
     );
